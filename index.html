@@ -177,7 +177,7 @@ body{background:
 input{border-radius:18px;background:#f6f3fb}
 
 /* floating nav */
-.nav{width:min(592px,calc(100% - 24px));bottom:calc(10px + env(safe-area-inset-bottom));border-radius:34px;padding:10px 6px;
+.nav{width:min(592px,calc(100% - 24px));bottom:max(6px,calc(env(safe-area-inset-bottom) - 22px));border-radius:34px;padding:10px 6px;
  background:rgba(255,255,255,.80);backdrop-filter:blur(22px) saturate(1.7);-webkit-backdrop-filter:blur(22px) saturate(1.7);
  border:1px solid rgba(255,255,255,.95);box-shadow:0 20px 44px rgba(27,16,55,.22),0 2px 6px rgba(27,16,55,.06)}
 .nav button{color:#a39bbd}
@@ -208,6 +208,10 @@ input{border-radius:18px;background:#f6f3fb}
 .tile.off .ti{filter:grayscale(1);opacity:.55}
 .tile.spin .ti svg{animation:sp .7s linear}
 .nav button svg{width:26px;height:26px}
+.pushbar{margin-top:14px}.pushbar:empty{display:none}
+.pushbar button,.pushbar .pk{width:100%;border-radius:18px;padding:13px 14px;font:500 14px Prompt,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
+.pushbar button{background:linear-gradient(145deg,#8b5cd6,#5a2fa0);color:#fff;box-shadow:0 8px 16px rgba(70,40,130,.22)}
+.pushbar .pk{background:#fff;color:#1f7f4a;box-shadow:var(--sh)}.pushbar .pw{background:#fff;color:#8a5a0e;box-shadow:var(--sh);border-radius:18px;padding:12px 14px;font:400 13px/1.5 Prompt,sans-serif}
 </style></head><body data-pg="home">
 <div id="m" class="note"></div>
 <div id="lockw"></div>
@@ -223,6 +227,7 @@ input{border-radius:18px;background:#f6f3fb}
 <button class="tile t5" data-act="snd" id="t5"><span class="ti"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4.8c-4.6 0-7.4 3.2-7.4 7.8v4L6.4 20.4V22h19.2v-1.6l-2.2-3.8v-4C23.4 8 20.6 4.8 16 4.8z" fill="#fff" fill-opacity=".26"/><path d="M13 25.2a3 3 0 0 0 6 0z" fill="#ffe3a3" stroke="none"/><path d="M3.8 12.5a12.6 12.6 0 0 1 3-6.2M28.2 12.5a12.6 12.6 0 0 0-3-6.2" stroke-opacity=".7" stroke-width="1.5"/><path class="sl" d="M5.5 5.5l21 21" stroke-width="3"/></svg></span><span id="t5l">เสียง: เปิด</span></button>
 <button class="tile t6" data-act="out"><span class="ti"><svg viewBox="0 0 32 32" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 5H8.5A2.5 2.5 0 0 0 6 7.5v17A2.5 2.5 0 0 0 8.5 27H14" fill="#fff" fill-opacity=".24"/><path d="M14 5v22" stroke-opacity=".5" stroke-width="1.4"/><path d="M17.5 10.5 23 16l-5.5 5.5M23 16H12" stroke-width="2.2"/><circle cx="26.2" cy="16" r="1.5" fill="#ffe3a3" stroke="none"/></svg></span>ออกจากระบบ</button>
 </div>
+<div id="pushbar" class="pushbar"></div>
 <div class="stats" id="hs2"></div>
 <div id="hr"><div class="panel"><div class="empty"><b>กำลังโหลด…</b></div></div></div>
 </section>
@@ -362,4 +367,20 @@ $("#pages").onkeydown=function(ev){if(ev.key==="Enter"){var c=ev.target.closest(
 $("#fq").oninput=function(){render()};
 $("#nav").onclick=function(ev){var b=ev.target.closest("button");if(!b)return;var t=b.dataset.t;if(t==="rf")refresh();else show(t)};
 if(sb){load();setInterval(load,5000)}
+/* ===== แจ้งเตือนนอกแอป (Web Push) ===== */
+function b64u(s){var p="=".repeat((4-s.length%4)%4),b=(s+p).replace(/-/g,"+").replace(/_/g,"/"),r=atob(b),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
+function pushOK(){return"serviceWorker"in navigator&&"PushManager"in window&&typeof Notification!=="undefined"}
+function pushUI(){var el=$("#pushbar");if(!el)return;
+ if(!pushOK()){el.innerHTML='<div class="pw">📲 อยากให้แจ้งเตือนเด้งบนหน้าจอล็อก: กดปุ่มแชร์ใน Safari → "เพิ่มไปยังหน้าจอโฮม" แล้วเปิดแอปจากไอคอนบนหน้าจอโฮม จากนั้นกลับมากดเปิดแจ้งเตือนที่นี่</div>';return}
+ if(Notification.permission==="granted"){el.innerHTML='<div class="pk">🔔 แจ้งเตือนมือถือ: เปิดอยู่</div>';return}
+ if(Notification.permission==="denied"){el.innerHTML='<div class="pw">🔕 แจ้งเตือนถูกปิดไว้ ไปที่ ตั้งค่า → การแจ้งเตือน → เลือกแอปนี้ → เปิดอนุญาต แล้วกลับมาเปิดใหม่</div>';return}
+ el.innerHTML='<button id="pushb">🔔 เปิดแจ้งเตือนสลิปเข้ามือถือ</button>';$("#pushb").onclick=function(){pushOn(true)}}
+function pushOn(ask){if(!sb||!pushOK()||!GX_SB.vapid)return Promise.resolve();
+ var p=(ask&&Notification.permission!=="granted")?Notification.requestPermission():Promise.resolve(Notification.permission);
+ return p.then(function(perm){if(perm!=="granted"){pushUI();return}
+  return navigator.serviceWorker.ready.then(function(reg){return reg.pushManager.getSubscription().then(function(s){return s||reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(GX_SB.vapid)})})})
+  .then(function(s){return sb.rpc("admin_push_save",{t:TOK,sub:s.toJSON()})})
+  .then(function(r){if(r&&r.error)msg("ตั้งค่าแจ้งเตือนไม่สำเร็จ: "+r.error.message+" (ต้องรัน push-setup.sql ก่อน)");pushUI()})}).catch(function(x){msg("เปิดแจ้งเตือนไม่ได้: "+(x&&x.message||x));pushUI()})}
+pushUI();if(sb&&pushOK()&&Notification.permission==="granted")pushOn(false);
+
 </script><script>if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("sw.js").catch(()=>{}))</script><script>/* block zoom */["gesturestart","gesturechange","gestureend"].forEach(function(t){document.addEventListener(t,function(e){e.preventDefault()},{passive:false})});document.addEventListener("wheel",function(e){if(e.ctrlKey)e.preventDefault()},{passive:false});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&["+","-","=","0"].indexOf(e.key)>-1)e.preventDefault()});var _lt=0;document.addEventListener("touchend",function(e){var n=Date.now();if(n-_lt<300)e.preventDefault();_lt=n},{passive:false});</script></body></html>

@@ -1,2 +1,2 @@
 /* ใส่ค่าจาก Supabase > Project Settings > API (anon public key ใส่ในเว็บได้ ปลอดภัยเพราะมี RLS คุมอยู่) */
-window.GX_SB={url:"https://sipzxcmdhxhxrumsepps.supabase.co",key:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpcHp4Y21kaHhoeHJ1bXNlcHBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTc4MzksImV4cCI6MjEwOTE5MzgzOX0.esGFXcfuYsYHfcLwg7voH-9JuNj87543JIrhrkngzhY"};
+window.GX_SB={url:"https://sipzxcmdhxhxrumsepps.supabase.co",key:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNpcHp4Y21kaHhoeHJ1bXNlcHBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM2MTc4MzksImV4cCI6MjEwOTE5MzgzOX0.esGFXcfuYsYHfcLwg7voH-9JuNj87543JIrhrkngzhY",vapid:"BGuFKh3ugfyp8NuDkhuzi5_k9sbwuumUsfJXeMBTSvBT0YgCVqC1jghd9jEntKW69Jy-Zm9W--QH61zjMXdgVk0"};
