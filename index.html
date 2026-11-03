@@ -212,6 +212,9 @@ input{border-radius:18px;background:#f6f3fb}
 .pushbar button,.pushbar .pk{width:100%;border-radius:18px;padding:13px 14px;font:500 14px Prompt,sans-serif;display:flex;align-items:center;justify-content:center;gap:8px}
 .pushbar button{background:linear-gradient(145deg,#8b5cd6,#5a2fa0);color:#fff;box-shadow:0 8px 16px rgba(70,40,130,.22)}
 .pushbar .pk{background:#fff;color:#1f7f4a;box-shadow:var(--sh)}.pushbar .pw{background:#fff;color:#8a5a0e;box-shadow:var(--sh);border-radius:18px;padding:12px 14px;font:400 13px/1.5 Prompt,sans-serif}
+
+/* v26: เลื่อนเหมือนเดิม แต่ขยับหัวแอปลงให้พ้นโซนที่ iOS เบลอใต้แถบสถานะ */
+body{padding-top:calc(env(safe-area-inset-top,0px) + 20px)}
 </style></head><body data-pg="home">
 <div id="m" class="note"></div>
 <div id="lockw"></div>
