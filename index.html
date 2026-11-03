@@ -371,7 +371,7 @@ if(sb){load();setInterval(load,5000)}
 function b64u(s){var p="=".repeat((4-s.length%4)%4),b=(s+p).replace(/-/g,"+").replace(/_/g,"/"),r=atob(b),a=new Uint8Array(r.length);for(var i=0;i<r.length;i++)a[i]=r.charCodeAt(i);return a}
 function pushOK(){return"serviceWorker"in navigator&&"PushManager"in window&&typeof Notification!=="undefined"}
 function pushUI(){var el=$("#pushbar");if(!el)return;
- if(!pushOK()){el.innerHTML='<div class="pw">📲 อยากให้แจ้งเตือนเด้งบนหน้าจอล็อก: กดปุ่มแชร์ใน Safari → "เพิ่มไปยังหน้าจอโฮม" แล้วเปิดแอปจากไอคอนบนหน้าจอโฮม จากนั้นกลับมากดเปิดแจ้งเตือนที่นี่</div>';return}
+ if(!pushOK()){el.innerHTML="";return}
  if(Notification.permission==="granted"){el.innerHTML='<div class="pk">🔔 แจ้งเตือนมือถือ: เปิดอยู่</div>';return}
  if(Notification.permission==="denied"){el.innerHTML='<div class="pw">🔕 แจ้งเตือนถูกปิดไว้ ไปที่ ตั้งค่า → การแจ้งเตือน → เลือกแอปนี้ → เปิดอนุญาต แล้วกลับมาเปิดใหม่</div>';return}
  el.innerHTML='<button id="pushb">🔔 เปิดแจ้งเตือนสลิปเข้ามือถือ</button>';$("#pushb").onclick=function(){pushOn(true)}}
