@@ -1,4 +1,6 @@
 {
+ "id": "./",
+ "lang": "th",
  "name": "แอดมิน – ตรวจสลิป",
  "short_name": "ตรวจสลิป",
  "start_url": "./",
@@ -7,10 +9,40 @@
  "background_color": "#3d1971",
  "theme_color": "#3d1971",
  "icons": [
-  {"src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
-  {"src": "icon-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any"},
-  {"src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
-  {"src": "icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable"},
-  {"src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"}
+  {
+   "src": "icon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-256.png",
+   "sizes": "256x256",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "icon-maskable-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "maskable"
+  },
+  {
+   "src": "icon-maskable-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "maskable"
+  }
+ ],
+ "orientation": "portrait",
+ "categories": [
+  "business",
+  "finance"
  ]
 }
