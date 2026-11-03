@@ -1,26 +1,95 @@
 <!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-v3.png"><link rel="icon" href="favicon.ico" sizes="any"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b0b0d"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ตรวจสลิป"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-v3.png"><link rel="icon" href="favicon.ico" sizes="any"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#f5f2fb"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ตรวจสลิป"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>แอดมิน – ตรวจสลิป</title>
-<style>body{font:16px system-ui,sans-serif;background:#0b0b0d;color:#eee;margin:0;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:max(16px,env(safe-area-inset-bottom));max-width:980px;margin:auto}
-input,button{font:inherit;padding:12px;border-radius:10px;border:1px solid #333;background:#1a1a1f;color:#eee;width:100%;box-sizing:border-box;margin:6px 0}
-button{background:#e63946;border:0;font-weight:700;cursor:pointer}button.g{background:#2a2a30}
-h2{margin:6px 0}h3{margin:22px 0 8px}.s{color:#9a9aa5;font-size:13px}.top{display:flex;gap:8px;align-items:center}.top button{width:auto;padding:8px 16px;margin:0}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
-.c{background:#16161b;border:1px solid #2a2a30;border-radius:12px;overflow:hidden;cursor:pointer}.c:hover{border-color:#e63946}
-.c img,.c .ph{width:100%;height:190px;object-fit:cover;background:#000;display:block}.c .ph{display:grid;place-items:center;color:#777;font-size:13px}
-.cb{padding:10px}.cb b{font-size:18px}.cb div{margin-top:2px;word-break:break-word}.c.paid{border-color:#2d6a4f}
-.new{display:inline-block;background:#e63946;color:#fff;font-size:11px;border-radius:99px;padding:1px 8px;margin-left:6px}
-#mod{position:fixed;inset:0;background:rgba(0,0,0,.85);display:none;align-items:center;justify-content:center;padding:12px;z-index:9}#mod.open{display:flex}
-.mb{background:#16161b;border:1px solid #2a2a30;border-radius:16px;width:min(560px,100%);max-height:100%;overflow:auto;padding:14px}
-.mb img{width:100%;max-height:60vh;object-fit:contain;background:#000;border-radius:10px}.row{display:flex;gap:8px}.warn{color:#ffb4ad}
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f5f2fb;--card:#fff;--ink:#2a1a4a;--mute:#7f7799;--blue:#5a2fa0;--mint:#d5f2ee;--teal:#1f7f86;--ok:#238a65;--okbg:#ddf1e9;--warn:#c9741a;--warnbg:#fff0dc;--bad:#d64557;--line:#ece7f4;--sh:0 10px 30px rgba(70,40,130,.12)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{margin:0;font:400 15px/1.5 Prompt,"Noto Sans Thai",system-ui,sans-serif;color:var(--ink);background:linear-gradient(#ece6f7,#f8f6fc 420px,var(--bg));min-height:100vh;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:calc(128px + env(safe-area-inset-bottom));max-width:620px;margin:auto}
+h1,h2{margin:0;font-weight:600}
+button,input{font:inherit;color:inherit}button{cursor:pointer;border:0}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.s{color:var(--mute);font-size:13px}
+.bar{display:flex;align-items:center;gap:12px;padding:8px 2px 16px}
+.logo{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:var(--sh);font:700 16px Prompt,sans-serif;color:var(--blue)}
+.bar .t{flex:1;min-width:0}.bar h1{font-size:22px;line-height:1.25}
+.live{display:flex;align-items:center;gap:6px;color:var(--mute);font-size:13px}.live i{width:7px;height:7px;border-radius:50%;background:#3cc08f;animation:lv 2.4s infinite}
+@keyframes lv{70%{box-shadow:0 0 0 7px rgba(60,192,143,0)}0%{box-shadow:0 0 0 0 rgba(60,192,143,.6)}}
+.ib{width:46px;height:46px;border-radius:50%;background:#fff;box-shadow:var(--sh);display:grid;place-items:center;color:var(--ink)}.ib svg{width:22px;height:22px}
+.ib.tx{width:auto;border-radius:99px;padding:0 16px;display:flex;gap:6px;align-items:center;font-weight:500;font-size:14px}.ib.tx svg{width:18px;height:18px}
+.note{background:#ffe9ec;border:1px solid #f6c3ca;color:#a8283b;border-radius:16px;padding:10px 14px;margin:0 0 14px;font-size:13.5px}.note:empty{display:none}
+.hero{position:relative;overflow:hidden;border-radius:28px;padding:22px 22px 20px;color:#fff;background:radial-gradient(circle at 88% 0,rgba(255,255,255,.2),transparent 48%),linear-gradient(135deg,#3a1b6e,#5a2fa0 58%,#7b4cc9);box-shadow:0 18px 38px rgba(70,40,130,.36)}
+.hero::after{content:"";position:absolute;right:-70px;bottom:-90px;width:210px;height:210px;border-radius:50%;border:1px solid rgba(255,255,255,.16);box-shadow:0 0 0 34px rgba(255,255,255,.04),0 0 0 68px rgba(255,255,255,.03);pointer-events:none}
+.hero .top{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:rgba(255,255,255,.85)}
+.chipg{width:40px;height:30px;border-radius:8px;background:linear-gradient(135deg,#f6e3b0,#c79a45);box-shadow:inset 0 0 0 1px rgba(255,255,255,.4)}
+.hv{font:600 42px/1.15 Prompt,sans-serif;margin-top:14px;letter-spacing:.3px}.hv small{font-size:20px;font-weight:500;margin-right:4px;opacity:.85}
+.hl{font-size:14.5px;color:rgba(255,255,255,.8);margin-top:2px}
+.hr2{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:20px;position:relative;z-index:1;flex-wrap:wrap}
+.hp{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:99px;padding:9px 16px;font-weight:500;font-size:14.5px}.hp i{width:9px;height:9px;border-radius:50%;background:#7be0b4}.hp.al i{background:#ffb347;box-shadow:0 0 0 4px rgba(255,179,71,.28)}
+.hbtn{display:flex;align-items:center;gap:8px;background:#fff;color:#4a2590;border-radius:99px;padding:11px 18px;font-weight:600;font-size:15px}.hbtn svg{width:19px;height:19px}
+.panel{background:var(--card);border-radius:28px;padding:18px 18px 8px;margin-top:18px;box-shadow:var(--sh)}
+.pt{display:flex;align-items:center;gap:10px;margin-bottom:6px}.pt svg{width:22px;height:22px;color:var(--blue)}.pt h2{font-size:19px;flex:1}
+.cnt{font:600 14px Prompt,sans-serif;color:#fff;background:var(--bad);border-radius:99px;padding:0 11px;min-width:26px;text-align:center}.cnt.z{background:#c9bfdc}
+.c{display:flex;gap:13px;align-items:center;padding:13px 0;border-bottom:1px solid var(--line);cursor:pointer}.c:last-child{border-bottom:0}.c:active{opacity:.7}
+.th{width:60px;height:76px;flex:none;border-radius:16px;overflow:hidden;background:#ece6f6;display:grid;place-items:center}.th img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.th.ic{width:60px;height:60px;border-radius:50%;background:#e9e1f7;color:var(--blue)}.th.ic svg{width:27px;height:27px}.th.ic.ok{background:var(--okbg);color:var(--ok)}
+.rb{flex:1;min-width:0}.rb .n{font-weight:500;font-size:15.5px;line-height:1.35;word-break:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.rb .s{margin-top:3px}
+.rr{text-align:right;flex:none}.rr b.in{color:var(--ok)}.rr b{display:block;font:600 19px Prompt,sans-serif;color:var(--ink)}
+.pill{display:inline-block;margin-top:4px;font-size:12px;font-weight:500;border-radius:99px;padding:1px 11px}.pill.pe{background:var(--warnbg);color:var(--warn)}.pill.pd{background:var(--okbg);color:var(--ok)}
+.empty{text-align:center;padding:26px 10px 30px;color:var(--mute)}.empty b{display:block;font-weight:600;font-size:17px;color:var(--ink);margin:6px 0 2px}
+.empty .th{margin:0 auto 6px}
+.lock{max-width:380px;margin:9vh auto 0;background:#fff;border-radius:28px;padding:28px 22px;text-align:center;box-shadow:var(--sh)}
+.lock .logo{margin:0 auto 14px;background:#f5f2fb;box-shadow:none}.lock h2{font-size:21px}.lock .s{margin:6px 0 18px}
+input{width:100%;height:50px;padding:0 16px;border-radius:16px;border:1.5px solid var(--line);background:#f7f4fc;margin:0}input::placeholder{color:#a99fc0}input:focus{border-color:var(--blue);outline:0;background:#fff}
+.btn{width:100%;height:52px;border-radius:16px;font-weight:500;font-size:16px;margin-top:10px;background:#efe9f9;color:var(--blue)}
+.btn.gd{background:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(90,47,160,.35)}
+.btn.ok{background:linear-gradient(145deg,#3cc08f,#238a65);color:#fff;box-shadow:0 8px 18px rgba(35,138,101,.3)}
+.btn.no{background:#fff;border:1.5px solid #f0b5bd;color:var(--bad)}
+.btn:active{transform:scale(.985)}
+.row{display:grid;grid-template-columns:1.4fr 1fr;gap:10px}
+#mod,#hist{position:fixed;inset:0;display:none}
+#mod{z-index:20;background:rgba(35,20,70,.45);backdrop-filter:blur(4px);align-items:flex-end;justify-content:center}#mod.open{display:flex}
+.mb{background:#fff;border-radius:30px 30px 0 0;width:min(560px,100%);max-height:94vh;overflow:auto;padding:10px 18px calc(20px + env(safe-area-inset-bottom));animation:up .22s ease-out}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.gr{width:44px;height:5px;border-radius:9px;background:#dcd3ec;margin:0 auto 14px}
+.mb img{width:100%;max-height:50vh;object-fit:contain;background:#f5f2fb;border-radius:20px;display:block}
+.mb .amt{font:700 36px/1.1 Prompt,sans-serif;margin-top:16px;color:var(--blue)}
+.mb .ttl{font-weight:500;font-size:17px;margin-top:4px;word-break:break-word}.mb .s{margin-top:2px}
+.warn{margin-top:12px;background:var(--warnbg);color:#9a5a10;border-radius:16px;padding:10px 14px;font-size:14px}
+.good{margin-top:12px;background:var(--okbg);color:var(--ok);border-radius:16px;padding:10px 14px;font-size:14px;font-weight:500}
+.done{display:flex;align-items:center;gap:10px;font:600 19px Prompt,sans-serif;color:var(--ok);margin:4px 0 14px}.done svg{width:30px;height:30px}
+.pd0{padding:0}
+#hist{z-index:9;background:linear-gradient(#ece6f7,var(--bg) 380px);overflow:auto;padding:16px;padding-top:max(16px,env(safe-area-inset-top));padding-bottom:calc(128px + env(safe-area-inset-bottom))}#hist.open{display:block}
+.hw{max-width:588px;margin:auto}
+.hh{position:sticky;top:-16px;z-index:2;background:linear-gradient(#efe9f8 85%,transparent);padding:8px 0 10px;margin:-8px 0 0}.hh .bar{padding-bottom:10px}
+.sm{display:inline-block;margin:10px 0 0;font-size:13.5px;color:var(--blue);background:#fff;border-radius:99px;padding:3px 14px;box-shadow:0 4px 12px rgba(70,40,130,.08);font-weight:500}
+.dh{display:flex;justify-content:space-between;align-items:baseline;margin:20px 6px -6px;font-weight:600;font-size:15.5px}.dh span{font-weight:400;font-size:13px;color:var(--mute)}
+.nav{position:fixed;left:50%;transform:translateX(-50%);bottom:0;z-index:10;width:min(620px,100%);background:#fff;border-radius:30px 30px 0 0;box-shadow:0 -8px 30px rgba(70,40,130,.14);display:grid;grid-template-columns:repeat(5,1fr);padding:10px 6px calc(10px + env(safe-area-inset-bottom));align-items:end}
+.nav button{background:none;display:flex;flex-direction:column;align-items:center;gap:3px;color:#9a90b3;font-size:12.5px;font-weight:500;padding:4px 0}.nav button svg{width:25px;height:25px}.nav button.on{color:var(--blue)}
+.nav .mid{color:var(--ink)}.nav .mid i{position:relative;width:62px;height:62px;border-radius:50%;background:var(--blue);color:#fff;display:grid;place-items:center;margin-top:-34px;border:5px solid #fff;box-shadow:0 8px 20px rgba(90,47,160,.45);font-style:normal}.nav .mid i svg{width:27px;height:27px}
+.nav .mid b{position:absolute;top:-7px;right:-7px;background:var(--bad);color:#fff;border-radius:99px;font:600 12px Prompt,sans-serif;min-width:22px;height:22px;display:grid;place-items:center;padding:0 5px;border:2px solid #fff}.nav .mid b:empty{display:none}
+.nav #rf.spin svg{animation:sp .7s linear}@keyframes sp{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
-<div class="top"><h2 style="flex:1">ตรวจสลิป / ยืนยันเงินเข้า</h2><button class="g" id="rf">รีเฟรช</button></div>
-<div id="app"><div id="out"></div></div><div id="m" class="s warn"></div>
-<div id="mod"><div class="mb"><div id="mc"></div></div></div>
+<div class="bar"><div class="logo">GX</div><div class="t"><h1>ตรวจสลิป</h1><div class="live"><i></i>แอดมิน • อัปเดตทุก 5 วินาที</div></div></div>
+<div id="m" class="note"></div>
+<div id="app"><div id="st"></div><div id="out"></div></div>
+<div id="hist"><div class="hw"><div class="hh"><div class="bar"><div class="t"><h1>ประวัติที่ยืนยันแล้ว</h1><div class="s">แตะที่รายการเพื่อดูสลิปตัวเต็ม</div></div><button class="ib tx" id="hx"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>ปิด</button></div><input id="hq" placeholder="ค้นหา ชื่อไฟล์ รหัสอ้างอิง หรือยอด" autocomplete="off"><div id="hs" class="sm"></div></div><div id="hl"></div></div></div>
+<div id="mod"><div class="mb"><div class="gr"></div><div id="mc"></div></div></div>
+<nav class="nav" id="nav">
+<button data-t="home" class="on"><svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg><span>หน้าหลัก</span></button>
+<button data-t="hist" id="hb"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span>ประวัติ</span></button>
+<button data-t="pend" class="mid"><i><svg viewBox="0 0 24 24"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9 4h6v3H9zM9 12h6M9 16h4"/></svg><b id="nb"></b></i><span>รอตรวจ</span></button>
+<button data-t="rf" id="rf"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 6"/><path d="M20 5v6h-6"/></svg><span>รีเฟรช</span></button>
+<button data-t="find"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span>ค้นหา</span></button>
+</nav>
 <script src="js/supabase-config.js"></script><script src="js/catalog-data.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script>
-var $=function(s){return document.querySelector(s)},T={},PR={},S={},O={},lastN=-1,cur=null,sb=null,TOK="",busy=false,B={},BT={},BB={},keep=null,saved=false;
+var $=function(s){return document.querySelector(s)},T={},PR={},S={},O={},lastN=-1,cur=null,sb=null,TOK="",busy=false,B={},BT={},BB={},keep=null,saved=false,H=[],curP=false,HB={},HBB={},NS={};
 (window.GX_CATALOG||[]).forEach(function(d){T[d.id]=d.t;PR[d.id]=d.p});
 function e(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
 function msg(t){$("#m").textContent=t||""}
@@ -30,36 +99,43 @@ if(!window.GX_SB||GX_SB.url.indexOf("YOUR-PROJECT")>=0){msg("ยังไม่�
 else if(!TOK){askTok("")}
 else{sb=supabase.createClient(GX_SB.url,GX_SB.key,{auth:{persistSession:false,autoRefreshToken:false}})}
 /* ไม่มีรหัสลับ/รหัสผิด: แสดงช่องให้กรอกรหัสเอง (เครื่องนี้จะจำไว้) */
-function askTok(note){sb=null;$("#out").innerHTML='<div style="max-width:420px;margin:24px 0"><div class="s" style="margin-bottom:6px">กรอกรหัสลับแอดมิน (ดูในไฟล์ supabase-setup.sql บรรทัดที่ 2)</div><input id="tk" type="password" autocomplete="off" placeholder="รหัสลับ" autofocus><button id="tkb">เข้าสู่หน้าแอดมิน</button></div>';msg(note);
+function askTok(note){sb=null;$("#st").innerHTML="";$("#out").innerHTML='<div class="lock"><div class="logo">GX</div><h2>เข้าสู่หน้าแอดมิน</h2><div class="s">กรอกรหัสลับแอดมิน (ดูในไฟล์ supabase-setup.sql บรรทัดที่ 2) เครื่องนี้จะจำไว้ให้</div><input id="tk" type="password" autocomplete="off" placeholder="รหัสลับ" autofocus><button class="btn gd" id="tkb">เข้าสู่หน้าแอดมิน</button></div>';msg(note);
  function go(){var v=$("#tk").value.trim();if(!v)return;try{localStorage.setItem("gx_admin",v)}catch(x){}location.reload()}
  $("#tkb").onclick=go;$("#tk").onkeydown=function(ev){if(ev.key==="Enter")go()}}
 function beep(){try{var c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.15;o.start();o.stop(c.currentTime+.25)}catch(x){}}
-function fetchSlips(list){var need=list.filter(function(o){return o.has_slip&&!S[o.id]}).slice(0,12);
- return Promise.all(need.map(function(o){return sb.rpc("admin_slip",{t:TOK,oid:o.id}).then(function(r){if(r.data){S[o.id]=r.data;prefetch(o.id,r.data)}})}))}
+function fetchSlips(list){var need=list.filter(function(o){return o.has_slip&&!S[o.id]&&!NS[o.id]&&!HB[o.id]}).slice(0,12);
+ return Promise.all(need.map(function(o){return sb.rpc("admin_slip",{t:TOK,oid:o.id}).then(function(r){if(r.data){S[o.id]=r.data;prefetch(o.id,r.data)}else NS[o.id]=1}).catch(function(){})}))}
 function prefetch(id,u){if(B[id])return;fetch(u).then(function(x){if(!x.ok)throw 0;return x.blob()}).then(function(b){B[id]=URL.createObjectURL(b);BB[id]=b;BT[id]=b.type||"image/jpeg"}).catch(function(){})}
-function card(o){var u=S[o.id],pr=PR[o.file_id];
- return'<div class="c '+(o.status==="paid"?"paid":"")+'" data-id="'+o.id+'">'+(u?'<img src="'+e(u)+'" alt="สลิป" loading="lazy">':'<div class="ph">'+(o.has_slip?"กำลังโหลดสลิป …":(o.status==="paid"?"ลบสลิปแล้ว":"ไม่มีรูปสลิป"))+'</div>')
- +'<div class="cb"><b>฿'+(pr!=null?pr:Number(o.amount))+'</b><div>'+e(T[o.file_id]||o.file_id)+'</div><div class="s">'+new Date(o.created_at).toLocaleString("th-TH")+'</div></div></div>'}
+function money(n){return Number(n).toLocaleString("th-TH")}
+function fmt(d){return new Date(d).toLocaleString("th-TH",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"})}
+var IC_CLIP="<svg viewBox=\"0 0 24 24\"><rect x=\"5\" y=\"4\" width=\"14\" height=\"17\" rx=\"2.5\"/><path d=\"M9 4h6v3H9zM9 12h6M9 16h4\"/></svg>",IC_OK="<svg viewBox=\"0 0 24 24\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M8 12.5l2.7 2.7L16 9.8\"/></svg>";
+function card(o){var u=S[o.id]||HB[o.id],pr=PR[o.file_id],pd=o.status==="paid",v=pr!=null?pr:Number(o.amount);
+ return'<div class="c" data-id="'+o.id+'" tabindex="0">'+(u?'<div class="th"><img src="'+e(u)+'" alt="สลิป" loading="lazy"></div>':'<div class="th ic '+(pd?"ok":"")+'">'+(pd?IC_OK:IC_CLIP)+'</div>')
+ +'<div class="rb"><div class="n">'+e(T[o.file_id]||o.file_id)+'</div><div class="s">'+fmt(o.created_at)+' • อ้างอิง '+o.id.slice(0,6).toUpperCase()+(!u&&o.has_slip&&!NS[o.id]?' • กำลังโหลดสลิป':(!u&&pd?' • ไม่มีรูปสลิป':''))+'</div></div>'
+ +'<div class="rr"><b class="'+(pd?"in":"")+'">+฿'+money(v)+'</b><span class="pill '+(pd?"pd":"pe")+'">'+(pd?"ยืนยันแล้ว":"รอตรวจ")+'</span></div></div>'}
+function stats(P){var td=new Date().toDateString(),t=H.filter(function(o){return new Date(o.created_at).toDateString()===td}),sum=0;t.forEach(function(o){var p=PR[o.file_id];sum+=Number(p!=null?p:o.amount)||0});
+ $("#nb").textContent=P.length||"";
+ $("#st").innerHTML='<div class="hero"><div class="top"><span>ยอดรับวันนี้ • '+new Date().toLocaleDateString("th-TH",{day:"numeric",month:"short",year:"numeric"})+'</span><i class="chipg"></i></div><div class="hv"><small>฿</small>'+sum.toLocaleString("th-TH",{minimumFractionDigits:2,maximumFractionDigits:2})+'</div><div class="hl">ยืนยันแล้ว '+t.length+' รายการ</div><div class="hr2"><div class="hp '+(P.length?"al":"")+'"><i></i>รอตรวจ '+P.length+' รายการ</div><button class="hbtn" id="hv"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg> ดูประวัติ</button></div></div>'}
 function load(){if(!sb||busy)return;busy=true;sb.rpc("admin_list",{t:TOK}).then(function(r){
  if(r.error){busy=false;if(/unauthorized/i.test(r.error.message)){try{localStorage.removeItem("gx_admin")}catch(x){}askTok("รหัสลับไม่ถูกต้อง: กรอกใหม่อีกครั้ง");return}msg("โหลดไม่ได้: "+r.error.message+" (ถ้าเพิ่งตั้งค่า ให้รัน supabase-setup.sql ใหม่ทั้งไฟล์)");return}msg("");
  O={};r.data.forEach(function(o){O[o.id]=o});
- var P=r.data.filter(function(o){return o.status==="pending"}),D=r.data.filter(function(o){return o.status==="paid"}).slice(0,24);
+ var P=r.data.filter(function(o){return o.status==="pending"}),D=r.data.filter(function(o){return o.status==="paid"});H=D;
  if(lastN>=0&&P.length>lastN)beep();lastN=P.length;document.title=(P.length?"("+P.length+") ":"")+"แอดมิน – ตรวจสลิป";
- fetchSlips(P.concat(D)).then(function(){busy=false;
-  $("#out").innerHTML='<h3>รอตรวจสลิป ('+P.length+')</h3><div class="grid">'+(P.map(card).join("")||'<div class="s">ไม่มีสลิปรอตรวจ</div>')+'</div><h3>ยืนยันแล้วล่าสุด</h3><div class="grid">'+(D.map(card).join("")||'<div class="s">ยังไม่มี</div>')+'</div>';
-  if(cur&&cur!==keep){if(!O[cur]||O[cur].status!=="pending")closeMod()}}).catch(function(){busy=false})})}
-function openMod(id){var o=O[id];if(!o)return;cur=id;var u=S[o.id],pr=PR[o.file_id],bad=pr!=null&&Number(o.amount)!==pr;
- $("#mc").innerHTML=(u?'<img src="'+e(u)+'" alt="สลิป">':'<div class="s">ไม่มีรูปสลิป</div>')
- +'<h3 style="margin:10px 0 2px">฿'+(pr!=null?pr:Number(o.amount))+' – '+e(T[o.file_id]||o.file_id)+'</h3><div class="s">อ้างอิง '+o.id.slice(0,6).toUpperCase()+' • '+new Date(o.created_at).toLocaleString("th-TH")+'</div>'
- +(bad?'<div class="s warn">ยอดที่ลูกค้าส่งมา '+Number(o.amount).toFixed(2)+' ไม่ตรงราคาไฟล์ ตรวจให้ดี</div>':'')
- +(o.status==="pending"?'<div class="row"><button data-id="'+o.id+'" data-s="paid">ยืนยันเงินเข้า</button><button class="g" data-id="'+o.id+'" data-s="cancelled">สลิปไม่ผ่าน</button></div>':'<div class="s">ยืนยันแล้ว (สลิปถูกลบออกจากระบบแล้ว)</div>')
- +(u?'<button class="g" id="dl">บันทึกสลิปลงเครื่อง</button>':'')+'<button class="g" id="cl">ปิด</button>';$("#mod").classList.add("open")}
+ fetchSlips($("#hist").classList.contains("open")?P.concat(H):P).then(function(){busy=false;
+  stats(P);$("#out").innerHTML='<div class="panel" id="pl"><div class="pt">'+"<svg viewBox=\"0 0 24 24\"><path d=\"M6 17V11a6 6 0 0 1 12 0v6l1.5 2h-15z\"/><path d=\"M10 21h4\"/></svg>"+'<h2>สลิปรอตรวจ</h2><span class="cnt '+(P.length?"":"z")+'">'+P.length+'</span></div>'+(P.map(card).join("")||'<div class="empty"><div class="th ic ok">'+IC_OK+'</div><b>ไม่มีสลิปรอตรวจ</b>เมื่อมีลูกค้าส่งสลิปใหม่ จะขึ้นที่นี่พร้อมเสียงแจ้งเตือน</div>')+'</div>';
+  renderHist();if(cur&&cur!==keep&&curP){if(!O[cur]||O[cur].status!=="pending")closeMod()}}).catch(function(){busy=false})})}
+function openMod(id){var o=O[id];if(!o)return;cur=id;curP=o.status==="pending";var u=S[o.id]||HB[o.id],pr=PR[o.file_id],bad=pr!=null&&Number(o.amount)!==pr;
+ $("#mc").innerHTML=(u?'<img src="'+e(u)+'" alt="สลิป">':'<div class="empty" style="background:#f5f2fb;border-radius:20px;padding:30px 10px">ไม่มีรูปสลิป</div>')
+ +'<div class="amt">฿'+money(pr!=null?pr:Number(o.amount))+'</div><div class="ttl">'+e(T[o.file_id]||o.file_id)+'</div><div class="s">อ้างอิง '+o.id.slice(0,6).toUpperCase()+' • '+new Date(o.created_at).toLocaleString("th-TH")+'</div>'
+ +(bad?'<div class="warn">ยอดที่ลูกค้าส่งมา ฿'+Number(o.amount).toFixed(2)+' ไม่ตรงราคาไฟล์ ตรวจให้ดีก่อนยืนยัน</div>':'')
+ +(o.status==="pending"?'<div class="row"><button class="btn ok" data-id="'+o.id+'" data-s="paid">ยืนยันเงินเข้า</button><button class="btn no" data-id="'+o.id+'" data-s="cancelled">สลิปไม่ผ่าน</button></div>':'<div class="good">ยืนยันแล้ว'+(HB[o.id]?' • สลิปที่เก็บไว้ในเครื่องนี้':(u?'':' • ไม่มีรูปสลิปเก็บไว้'))+'</div>')
+ +(u?'<button class="btn" id="dl">บันทึกสลิปลงเครื่อง</button>':'')+'<button class="btn" id="cl">ปิด</button>';$("#mod").classList.add("open")}
 function isIOS(){return /iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1)}
-function dl(id){try{var o=O[id],u=B[id];if(!o||!u)return false;var ext=(BT[id]||"image/jpeg").indexOf("png")>=0?"png":"jpg",name="slip-"+o.id.slice(0,6).toUpperCase()+"-"+o.file_id+"."+ext;
+function dl(id){try{var o=O[id],u=B[id]||HB[id];if(!BB[id]&&HBB[id]){BB[id]=HBB[id];BT[id]=HBB[id].type}if(!o||!u)return false;var ext=(BT[id]||"image/jpeg").indexOf("png")>=0?"png":"jpg",name="slip-"+o.id.slice(0,6).toUpperCase()+"-"+o.file_id+"."+ext;
  if(isIOS()&&BB[id]&&navigator.canShare&&window.File){var f=new File([BB[id]],name,{type:BT[id]||"image/jpeg"});if(navigator.canShare({files:[f]})){navigator.share({files:[f]}).catch(function(){});return true}}
  var a=document.createElement("a");a.href=u;a.download=name;a.style.display="none";document.body.appendChild(a);a.click();setTimeout(function(){a.remove()},1000);return true}catch(x){return false}}
-function doneMod(id){var u=B[id];keep=id;saved=false;cur=id;
- $("#mc").innerHTML='<div class="s" style="color:#95d5b2;font-weight:700;margin-bottom:8px">ยืนยันเงินเข้าเรียบร้อยแล้ว</div><img src="'+e(u)+'" alt="สลิป"><div class="s warn" style="margin:8px 0">สลิปถูกลบออกจากระบบแล้ว กด “บันทึกสลิปลงเครื่อง” ก่อนปิด</div><button class="g" id="dl">บันทึกสลิปลงเครื่อง</button><button class="g" id="cl">ปิด</button>';$("#mod").classList.add("open")}
+function doneMod(id){var u=B[id];keep=id;saved=false;cur=id;curP=false;
+ $("#mc").innerHTML='<div class="done">'+IC_OK+'ยืนยันเงินเข้าเรียบร้อยแล้ว</div><img src="'+e(u)+'" alt="สลิป"><div class="good">เก็บสลิปไว้ในประวัติของเครื่องนี้แล้ว จะกด “บันทึกสลิปลงเครื่อง” ไว้อีกชุดก็ได้</div><button class="btn gd" id="dl">บันทึกสลิปลงเครื่อง</button><button class="btn" id="cl">ปิด</button>';$("#mod").classList.add("open")}
 function closeMod(){if(keep&&!saved&&!confirm("ยังไม่ได้บันทึกสลิปลงเครื่อง สลิปจะหายถาวร ต้องการปิดเลยไหม?"))return;if(keep){var bu=B[keep];delete B[keep];delete BB[keep];if(bu)URL.revokeObjectURL(bu);keep=null}cur=null;$("#mod").classList.remove("open")}
 $("#out").onclick=function(ev){var c=ev.target.closest(".c");if(c)openMod(c.dataset.id)};
 $("#mod").onclick=function(ev){if(ev.target.id==="mod"||ev.target.id==="cl")return closeMod();
@@ -67,7 +143,33 @@ $("#mod").onclick=function(ev){if(ev.target.id==="mod"||ev.target.id==="cl")retu
  var b=ev.target.closest("button[data-id]");if(!b||!sb)return;
  if(b.dataset.s==="paid"&&!confirm("ตรวจสลิปแล้วว่าถูกต้อง ยอดตรง และเงินเข้าบัญชีจริง?"))return;
  var id=b.dataset.id,isPaid=b.dataset.s==="paid";if(isPaid&&!B[id]&&O[id]&&O[id].has_slip&&!confirm("สลิปยังโหลดไม่เสร็จ ถ้ากดยืนยันตอนนี้จะบันทึกสลิปลงเครื่องไม่ได้ ต้องการยืนยันต่อไหม?"))return;
-  sb.rpc("admin_set",{t:TOK,oid:id,s:b.dataset.s}).then(function(r){if(r.error)msg("แก้ไม่ได้: "+r.error.message);else{if(isPaid){delete S[id];if(B[id])doneMod(id);else closeMod()}else closeMod()}load()})};
-$("#rf").onclick=load;
+  sb.rpc("admin_set",{t:TOK,oid:id,s:b.dataset.s}).then(function(r){if(r.error)msg("แก้ไม่ได้: "+r.error.message);else{if(isPaid){delete S[id];if(BB[id])keepSlip(id,BB[id]);if(B[id])doneMod(id);else closeMod()}else closeMod()}load()})};
+function dayKey(d){return new Date(d).toLocaleDateString("th-TH",{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
+function renderHist(){if(!$("#hist").classList.contains("open"))return;
+ var q=($("#hq").value||"").trim().toLowerCase(),L=H.filter(function(o){if(!q)return true;var pr=PR[o.file_id];return((T[o.file_id]||o.file_id)+" "+o.id.slice(0,6)+" "+(pr!=null?pr:o.amount)).toLowerCase().indexOf(q)>=0}),tot=0,G=[],gi={};
+ L.forEach(function(o){var pr=PR[o.file_id],v=Number(pr!=null?pr:o.amount)||0;tot+=v;var k=dayKey(o.created_at);if(!(k in gi)){gi[k]=G.length;G.push({k:k,s:0,l:[]})}var g=G[gi[k]];g.s+=v;g.l.push(o)});
+ var h="";G.forEach(function(g){h+='<div class="dh">'+g.k+'<span>'+g.l.length+' รายการ • ฿'+money(g.s)+'</span></div><div class="panel" style="margin-top:12px;padding-top:6px">'+g.l.map(card).join("")+'</div>'});
+ $("#hs").textContent=L.length+" รายการ • รวม ฿"+money(tot);$("#hl").innerHTML=h||'<div class="panel"><div class="empty"><b>ไม่พบรายการ</b>ลองเปลี่ยนคำค้นหา</div></div>'}
+var DB=null;
+function idb(){return new Promise(function(ok,no){try{var q=indexedDB.open("gx_slips",1);q.onupgradeneeded=function(){q.result.createObjectStore("s",{keyPath:"id"})};q.onsuccess=function(){ok(q.result)};q.onerror=function(){no()}}catch(x){no()}})}
+function idbPut(id,b){return idb().then(function(d){return new Promise(function(ok,no){var t=d.transaction("s","readwrite");t.objectStore("s").put({id:id,blob:b,t:Date.now()});t.oncomplete=function(){ok(true)};t.onerror=function(){no()}})}).catch(function(){return false})}
+function idbAll(){return idb().then(function(d){return new Promise(function(ok){var r=d.transaction("s").objectStore("s").getAll();r.onsuccess=function(){ok(r.result||[])};r.onerror=function(){ok([])}})}).catch(function(){return[]})}
+function keepSlip(id,bl){HBB[id]=bl;if(!HB[id])HB[id]=URL.createObjectURL(bl);idbPut(id,bl).then(function(ok){if(ok&&keep===id)saved=true;else if(!ok)msg("เก็บสลิปไว้ในเครื่องไม่สำเร็จ กรุณากดบันทึกสลิปลงเครื่อง")});renderHist()}
+idbAll().then(function(rows){rows.forEach(function(r){if(r.blob&&!HB[r.id]){HBB[r.id]=r.blob;HB[r.id]=URL.createObjectURL(r.blob)}});renderHist()});
+try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist()}catch(x){}
+function tab(t){document.querySelectorAll("#nav button").forEach(function(b){b.classList.toggle("on",b.dataset.t===t)})}
+function openHist(){$("#hist").classList.add("open");tab("hist");renderHist();load()}
+function closeHist(){$("#hist").classList.remove("open");tab("home")}
+$("#hx").onclick=closeHist;$("#hq").oninput=renderHist;
+$("#st").onclick=function(ev){if(ev.target.closest("#hv"))openHist()};
+$("#nav").onclick=function(ev){var b=ev.target.closest("button");if(!b)return;var t=b.dataset.t;
+ if(t==="home"){closeHist();window.scrollTo({top:0,behavior:"smooth"})}
+ else if(t==="hist"){openHist();$("#hist").scrollTop=0}
+ else if(t==="pend"){closeHist();var p=$("#pl");if(p)p.scrollIntoView({behavior:"smooth",block:"start"})}
+ else if(t==="rf"){b.classList.remove("spin");void b.offsetWidth;b.classList.add("spin");load()}
+ else if(t==="find"){openHist();setTimeout(function(){$("#hq").focus()},60)}};
+$("#hl").onclick=function(ev){var c=ev.target.closest(".c");if(c)openMod(c.dataset.id)};
+
 if(sb){load();setInterval(load,5000)}
+$("#out").onkeydown=$("#hl").onkeydown=function(ev){if(ev.key==="Enter"){var c=ev.target.closest(".c");if(c)openMod(c.dataset.id)}};
 </script></body></html>
