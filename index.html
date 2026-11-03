@@ -1,5 +1,5 @@
 <!doctype html><html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-v3.png"><link rel="icon" href="favicon.ico" sizes="any"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#f5f2fb"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ตรวจสลิป"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon-v4.png"><link rel="apple-touch-icon" sizes="167x167" href="apple-touch-icon-167.png"><link rel="apple-touch-icon" sizes="152x152" href="apple-touch-icon-152.png"><link rel="icon" href="favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="192x192" href="icon-192.png"><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#f5f2fb"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ตรวจสลิป"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>แอดมิน – ตรวจสลิป</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 :focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 .s{color:var(--mute);font-size:13px}
 .bar{display:flex;align-items:center;gap:12px;padding:8px 2px 16px}
-.logo{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;background:#fff;box-shadow:var(--sh);font:700 16px Prompt,sans-serif;color:var(--blue)}
+.logo{width:50px;height:50px;border-radius:14px;overflow:hidden;display:grid;place-items:center;background:#fff;box-shadow:var(--sh);font:700 16px Prompt,sans-serif;color:var(--blue)}
 .bar .t{flex:1;min-width:0}.bar h1{font-size:22px;line-height:1.25}
 .live{display:flex;align-items:center;gap:6px;color:var(--mute);font-size:13px}.live i{width:7px;height:7px;border-radius:50%;background:#3cc08f;animation:lv 2.4s infinite}
 @keyframes lv{70%{box-shadow:0 0 0 7px rgba(60,192,143,0)}0%{box-shadow:0 0 0 0 rgba(60,192,143,.6)}}
@@ -42,7 +42,7 @@ svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-l
 .empty{text-align:center;padding:26px 10px 30px;color:var(--mute)}.empty b{display:block;font-weight:600;font-size:17px;color:var(--ink);margin:6px 0 2px}
 .empty .th{margin:0 auto 6px}
 .lock{max-width:380px;margin:9vh auto 0;background:#fff;border-radius:28px;padding:28px 22px;text-align:center;box-shadow:var(--sh)}
-.lock .logo{margin:0 auto 14px;background:#f5f2fb;box-shadow:none}.lock h2{font-size:21px}.lock .s{margin:6px 0 18px}
+.logo img{width:100%;height:100%;display:block;object-fit:cover}.lock .logo{margin:0 auto 14px;background:#f5f2fb;box-shadow:none}.lock h2{font-size:21px}.lock .s{margin:6px 0 18px}
 input{width:100%;height:50px;padding:0 16px;border-radius:16px;border:1.5px solid var(--line);background:#f7f4fc;margin:0}input::placeholder{color:#a99fc0}input:focus{border-color:var(--blue);outline:0;background:#fff}
 .btn{width:100%;height:52px;border-radius:16px;font-weight:500;font-size:16px;margin-top:10px;background:#efe9f9;color:var(--blue)}
 .btn.gd{background:var(--blue);color:#fff;box-shadow:0 8px 18px rgba(90,47,160,.35)}
@@ -74,7 +74,7 @@ input{width:100%;height:50px;padding:0 16px;border-radius:16px;border:1.5px soli
 .nav #rf.spin svg{animation:sp .7s linear}@keyframes sp{to{transform:rotate(360deg)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style></head><body>
-<div class="bar"><div class="logo">GX</div><div class="t"><h1>ตรวจสลิป</h1><div class="live"><i></i>แอดมิน • อัปเดตทุก 5 วินาที</div></div></div>
+<div class="bar"><div class="logo"><img src="logo-128.png" alt="โลโก้" width="50" height="50"></div><div class="t"><h1>ตรวจสลิป</h1><div class="live"><i></i>แอดมิน • อัปเดตทุก 5 วินาที</div></div></div>
 <div id="m" class="note"></div>
 <div id="app"><div id="st"></div><div id="out"></div></div>
 <div id="hist"><div class="hw"><div class="hh"><div class="bar"><div class="t"><h1>ประวัติที่ยืนยันแล้ว</h1><div class="s">แตะที่รายการเพื่อดูสลิปตัวเต็ม</div></div><button class="ib tx" id="hx"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>ปิด</button></div><input id="hq" placeholder="ค้นหา ชื่อไฟล์ รหัสอ้างอิง หรือยอด" autocomplete="off"><div id="hs" class="sm"></div></div><div id="hl"></div></div></div>
@@ -99,7 +99,7 @@ if(!window.GX_SB||GX_SB.url.indexOf("YOUR-PROJECT")>=0){msg("ยังไม่�
 else if(!TOK){askTok("")}
 else{sb=supabase.createClient(GX_SB.url,GX_SB.key,{auth:{persistSession:false,autoRefreshToken:false}})}
 /* ไม่มีรหัสลับ/รหัสผิด: แสดงช่องให้กรอกรหัสเอง (เครื่องนี้จะจำไว้) */
-function askTok(note){sb=null;$("#st").innerHTML="";$("#out").innerHTML='<div class="lock"><div class="logo">GX</div><h2>เข้าสู่หน้าแอดมิน</h2><div class="s">กรอกรหัสลับแอดมิน (ดูในไฟล์ supabase-setup.sql บรรทัดที่ 2) เครื่องนี้จะจำไว้ให้</div><input id="tk" type="password" autocomplete="off" placeholder="รหัสลับ" autofocus><button class="btn gd" id="tkb">เข้าสู่หน้าแอดมิน</button></div>';msg(note);
+function askTok(note){sb=null;$("#st").innerHTML="";$("#out").innerHTML='<div class="lock"><div class="logo"><img src="logo-128.png" alt="โลโก้" width="50" height="50"></div><h2>เข้าสู่หน้าแอดมิน</h2><div class="s">กรอกรหัสลับแอดมิน (ดูในไฟล์ supabase-setup.sql บรรทัดที่ 2) เครื่องนี้จะจำไว้ให้</div><input id="tk" type="password" autocomplete="off" placeholder="รหัสลับ" autofocus><button class="btn gd" id="tkb">เข้าสู่หน้าแอดมิน</button></div>';msg(note);
  function go(){var v=$("#tk").value.trim();if(!v)return;try{localStorage.setItem("gx_admin",v)}catch(x){}location.reload()}
  $("#tkb").onclick=go;$("#tk").onkeydown=function(ev){if(ev.key==="Enter")go()}}
 function beep(){try{var c=new (window.AudioContext||window.webkitAudioContext)(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=880;g.gain.value=.15;o.start();o.stop(c.currentTime+.25)}catch(x){}}
